@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import Users from "./components/Users/Users";
 
 import "./App.css";
-
-const DUMMY_USERS = [
-  { id: "u1", name: "John Doe" },
-  { id: "u2", name: "Jane Smith" },
-  { id: "u3", name: "Alice Johnson" },
-];
+import UserContext from "./store/user-context";
 
 class App extends Component {
+  static contextType = UserContext;
+
   constructor() {
     super();
     this.state = {
@@ -36,14 +33,14 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      filteredUsers: DUMMY_USERS,
+      filteredUsers: this.context.users,
     });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchInput !== this.state.searchInput) {
       this.setState({
-        filteredUsers: DUMMY_USERS.filter((item) =>
+        filteredUsers: this.context.users.filter((item) =>
           item.name.toLowerCase().includes(this.state.searchInput)
         ),
       });
