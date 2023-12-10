@@ -1,23 +1,37 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import Users from "./components/Users/Users";
 
 import "./App.css";
 
-const App = () => {
-  const [showUsers, setShowUsers] = useState(true);
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showUsers: true,
+    };
+  }
 
-  const handleToggleUsers = () => {
-    setShowUsers((prevShowUsers) => !prevShowUsers);
-  };
+  handleToggleUsers() {
+    this.setState((currentState) => {
+      return {
+        showUsers: !currentState.showUsers,
+      };
+    });
+  }
 
-  return (
-    <div className="app">
-      <button className="toggle-button" onClick={handleToggleUsers}>
-        {showUsers ? "Hide" : "Show"} Users
-      </button>
-      {showUsers && <Users />}
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="app">
+        <button
+          className="toggle-button"
+          onClick={this.handleToggleUsers.bind(this)}
+        >
+          {this.state.showUsers ? "Hide" : "Show"} Users
+        </button>
+        {this.state.showUsers && <Users />}
+      </div>
+    );
+  }
+}
 
 export default App;

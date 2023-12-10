@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 
 import "./UserItem.css";
 
-const UserItem = ({ name }) => {
-  return <li className="user-item">{name}</li>;
-};
-
+class UserItem extends Component {
+  render() {
+    return <li className="user-item">{this.props.name}</li>;
+  }
+}
 export default UserItem;
